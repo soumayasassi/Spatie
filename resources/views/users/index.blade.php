@@ -6,7 +6,7 @@
                     <h2>Users Management</h2>
                 </div>
                 <div class="pull-right">
-                    @can('user-create')
+                    @can(' create users')
                         <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
                     @endcan
                 </div>
@@ -18,6 +18,8 @@
                 <p>{{ $message }}</p>
             </div>
         @endif
+
+
 
         <table class="table table-bordered">
             <tr>
@@ -32,6 +34,7 @@
                     <td>{{ ++$i }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+
                     {{--<td>
                         @if(!empty($user->getRoleNames()))
                             @foreach($user->getRoleNames() as $v)
@@ -41,10 +44,10 @@
                     </td>--}}
                     <td>
                         <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                        @can('user-edit')
+                        @can('create users')
                             <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
                         @endcan
-                        @can('user-delete')
+                        @can('delete users')
                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}

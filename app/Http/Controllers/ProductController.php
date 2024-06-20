@@ -12,12 +12,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
+   function __construct()
     {
-        $this->middleware('permission:list products|create products|show products|delete products', ['only' => ['index','show']]);
-        $this->middleware('permission:show products', ['only' => ['show']]);
+        $this->middleware('permission:list products|create products|delete products', ['only' => ['index','show']]);
         $this->middleware('permission:create products', ['only' => ['edit','create']]);
-        $this->middleware('permission: delete products', ['only' => ['destroy']]);
+        $this->middleware('permission:delete products', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -111,6 +110,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        //$this->authorize('delete products', Product::class);
         $product->delete();
 
         return redirect()->route('products.index')

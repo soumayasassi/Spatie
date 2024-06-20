@@ -12,6 +12,12 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:list users|create users|delete users', ['only' => ['index','show']]);
+        $this->middleware('permission:create users', ['only' => [ 'edit','create']]);
+        $this->middleware('permission: delete users', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

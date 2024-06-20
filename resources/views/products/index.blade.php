@@ -16,14 +16,14 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+
             <th>Name</th>
-            <th>Details</th>
+            <th>Description</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($products as $product)
             <tr>
-                <td>{{ ++$i }}</td>
+
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>
@@ -47,5 +47,4 @@
 
 
 
-    <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 

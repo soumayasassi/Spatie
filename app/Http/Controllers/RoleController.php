@@ -17,10 +17,9 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:list roles', ['only' => ['index']]);
+        $this->middleware('permission:create roles', ['only' => ['edit','create']]);
+        $this->middleware('permission:delete roles', ['only' => ['destroy']]);
     }
 
     /**
@@ -43,9 +42,9 @@ class RoleController extends Controller
     public function create()
     {
 
-        $permission = Permission::get();
+        $permissions = Permission::get();
         //dd($permission);
-        return view('roles.create',compact('permission'));
+        return view('roles.create',compact('permissions'));
     }
 
     /**
@@ -58,14 +57,20 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permissions' => 'required|array',
+             // Vérifie que chaque élément du tableau existe en tant qu'ID de permission
         ]);
 
+        $permissionsID = array_map(
+            function($value) { return (int)$value; },
+            $request->input('permissions')
+        );
+
         $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($permissionsID);
 
         return redirect()->route('roles.index')
-            ->with('success','Role created successfully');
+            ->with('success', 'Role created successfully');
     }
     /**
      * Display the specified resource.

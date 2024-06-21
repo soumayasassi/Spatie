@@ -42,8 +42,6 @@ class PermissionSeeder extends Seeder
         $role2->givePermissionTo('create products');
 
         $role2->givePermissionTo('create users');
-        $role2->givePermissionTo('list users');
-
         $role2->givePermissionTo('list roles');
 
         $role3 = Role::create(['name' => 'Super-Admin']);

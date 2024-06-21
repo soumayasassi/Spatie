@@ -1,4 +1,8 @@
+@extends('layouts.app')
 
+@section('content')
+
+    @can('list products')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -14,7 +18,7 @@
 
 
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="width: 80%; margin-left: 100px">
         <tr>
 
             <th>Name</th>
@@ -44,7 +48,7 @@
             </tr>
         @endforeach
     </table>
-
-
+    @endcan
+@endsection
 
 

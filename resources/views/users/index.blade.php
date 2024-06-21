@@ -1,5 +1,32 @@
 @extends('layouts.app')
 @section('content')
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{{ route('home') }}">Navbar</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Users link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                </li>
+
+                <!-- Products link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('products.index') }}">Products</a>
+                </li>
+
+                <!-- Roles link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     @can('list users')
     <div class="container">
         <div class="row">
